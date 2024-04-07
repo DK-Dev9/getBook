@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Collection</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      list-style: none;
+    }
+    body{
+      background-color:cadetblue;
+    }
+
+    .main{
+      padding:0  100px;
+      width: 100%;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(213, 228, 228, 0.23);
+      /* background-color: rgb(254, 227, 192); */
+      /* box-shadow: 0 5px 100px rgb(107, 106, 106); */
+    }
+
+    .container{
+      display: flex;
+      justify-content: center;
+      /* gap: 50px; */
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 100px;
+      /* box-shadow: 5px 0 100px rgb(199, 197, 197); */
+    }
+
+    .book-card {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      height: 320px;
+      overflow: hidden;
+      box-shadow: 5px 5px 20px rgb(0, 0, 0);
+      background-color: white;
+    }
+    .book-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .book-card h3 {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .srch{
+      padding: 5px 20px;
+    }
+    button{
+
+      background-color: rgba(0, 0, 255, 0.63);
+    }
+    .book-card:hover{
+      background-color: antiquewhite;
+      scale: 1.01;
+    }
+    .nav{
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 100px;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.415);
+      color: white;
+    }
+    .nav ul{
+      display: flex;
+    }
+    .nav ul li{
+      padding: 0 15px;
+    }
+    h1{
+      text-align: center;
+      padding-top: 50px;
+      text-transform: uppercase;
+      font-weight: 900;
+      display: flex;
+      flex-direction: column;
+    }
+    .text::after{
+      content: '';
+      width: 300px;
+      padding: 1px;
+      margin : 0 auto;
+      background-color: rgb(255, 255, 255);
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <h2>.getBook</h2>
+    <ul>
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact Us</li>
+    </ul>
+  </div>
+  <div class="main">
+    <h1>A Book That Change Life</h1>
+    <form action="/search" method="get">
+      <input class="srch"  type="text" name="search" placeholder="Search your book"/>
+      <button class="srch" type="submit">submit</button>
+    </form>
+  </div>
+
+  <!-- <h2>Your Books</h2> -->
+  <h1 class="text">
+    Your Books
+  </h1>
+  <div class="container">
+    
+  <% for (let i=0; i<data.length; i++) { %>
+
+    <% if (data[i].volumeInfo.imageLinks && data[i].volumeInfo.imageLinks.smallThumbnail) { %>
+  <div class="book-card">
+      <img src="<%= data[i].volumeInfo.imageLinks.smallThumbnail %>" alt="<%= data[i].title %>">
+
+      <h3><%= data[i].volumeInfo.title %></h3>
+      <% if (data[i].volumeInfo.authors) { %>
+        <p>By <%= data[i].volumeInfo.authors[0] %></p>
+      <% } %>
+      <% if(data[i].saleInfo && data[i].saleInfo.listPrice){ %>
+      <P><%= data[i].saleInfo.listPrice.amount %>&dollar;</P>
+      <% } %>
+    </div>
+    <% } %>
+
+   
+  <% } %>
+  
+</div>
+  
+</body>
+</html>
